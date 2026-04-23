@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabien BOSTDEDORE — Artisan du Bâtiment</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #F5F0E8; --cream-2: #EDE6D6; --cream-3: #E4DAC4;
+    --brown: #3D2B1F; --brown-2: #5C4033; --brown-3: #7A5545;
+    --terra: #8B4513; --terra-light: #A0522D;
+    --text: #2C1810; --text-muted: #7A6458;
+    --border: rgba(61,43,31,0.15);
+    --border-strong: rgba(61,43,31,0.3);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(245,240,232,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--brown); letter-spacing: 0.02em; }
+  .nav-logo strong { text-transform: uppercase; font-weight: 600; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--terra); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 4rem 5rem; background: var(--cream); position: relative; z-index: 1; }
+  .hero-right { background: var(--brown); position: relative; overflow: hidden; }
+  .hero-right::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px); }
+  .hero-right-content { position: absolute; bottom: 5rem; left: 3rem; right: 3rem; }
+  .hero-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .hero-tag::before { content: ''; display: block; width: 30px; height: 1px; background: var(--terra); }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; line-height: 1.1; margin-bottom: 2rem; color: var(--brown); }
+  .hero h1 em { font-style: italic; color: var(--terra); }
+  .hero-sub { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; max-width: 400px; line-height: 1.8; margin-bottom: 3rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 1rem; background: var(--terra); color: var(--cream); padding: 1rem 2rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, transform 0.2s; align-self: flex-start; }
+  .hero-cta:hover { background: var(--terra-light); transform: translateY(-2px); }
+  .hero-stat { color: var(--cream-2); }
+  .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 400; color: var(--cream); display: block; line-height: 1; }
+  .hero-stat-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.5); margin-top: 0.3rem; display: block; }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500; line-height: 1.2; margin-bottom: 1rem; color: var(--brown); }
+  .section-divider { width: 40px; height: 1px; background: var(--terra); margin-bottom: 3rem; }
+
+  /* SERVICES */
+  .services { background: var(--cream-2); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border: 1px solid var(--border-strong); margin-top: 3rem; }
+  .service-card { padding: 2.5rem 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+  .service-card:hover { background: var(--cream-3); }
+  .service-card:last-child { border-right: none; }
+  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--terra); opacity: 0.3; line-height: 1; margin-bottom: 1rem; }
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--brown); }
+  .service-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+  /* ABOUT */
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .about-left { padding: 6rem 4rem; background: var(--brown); color: var(--cream); }
+  .about-left .section-title { color: var(--cream); }
+  .about-left .section-label { color: var(--cream-3); opacity: 0.7; }
+  .about-left .section-divider { background: var(--terra); }
+  .about-left p { font-size: 0.95rem; color: rgba(245,240,232,0.7); line-height: 1.8; font-weight: 300; margin-bottom: 1rem; }
+  .about-right { padding: 6rem 4rem; background: var(--cream-2); display: flex; flex-direction: column; justify-content: center; gap: 2rem; }
+  .about-stat { border-left: 2px solid var(--terra); padding-left: 1.5rem; }
+  .about-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 400; color: var(--terra); line-height: 1; }
+  .about-stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+
+  /* ZONE */
+  .zone { background: var(--cream); }
+  .zone-box { display: flex; align-items: center; gap: 3rem; padding: 2.5rem; border: 1px solid var(--border-strong); max-width: 600px; background: var(--cream-2); }
+  .zone-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .zone-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: var(--brown); margin-bottom: 0.5rem; }
+  .zone-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* AVIS */
+  .avis-section { background: var(--cream-2); }
+  .avis-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .voir-tous { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terra); text-decoration: none; border-bottom: 1px solid var(--terra); padding-bottom: 2px; transition: opacity 0.3s; }
+  .voir-tous:hover { opacity: 0.7; }
+  .avis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .avis-card { background: var(--cream); border: 1px solid var(--border); padding: 2rem; }
+  .avis-stars { color: var(--terra); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .avis-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--brown); line-height: 1.6; font-style: italic; margin-bottom: 1rem; }
+  .avis-author { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .avis-reponse { margin-top: 1rem; padding: 0.75rem 1rem; background: var(--cream-2); border-left: 2px solid var(--terra); font-size: 0.82rem; color: var(--text-muted); }
+  .avis-reponse strong { color: var(--terra); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+  .laisser-avis-btn { display: inline-flex; align-items: center; gap: 0.75rem; margin-top: 2rem; background: none; border: 1px solid var(--terra); color: var(--terra); padding: 0.85rem 1.8rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+  .laisser-avis-btn:hover { background: var(--terra); color: var(--cream); }
+
+  /* FAQ */
+  .faq { background: var(--cream); }
+  .faq-list { max-width: 700px; margin-top: 2rem; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question { width: 100%; background: none; border: none; color: var(--text); font-family: 'Jost', sans-serif; font-size: 0.92rem; padding: 1.2rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-question:hover { color: var(--terra); }
+  .faq-arrow { color: var(--terra); transition: transform 0.3s; font-size: 1.2rem; line-height: 1; }
+  .faq-answer { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.2rem; }
+
+  /* DEVIS */
+  .devis-section { background: var(--brown); }
+  .devis-section .section-label { color: var(--cream-3); opacity: 0.7; }
+  .devis-section .section-title { color: var(--cream); }
+  .devis-section .section-divider { background: var(--terra); }
+  .devis-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; margin-top: 3rem; }
+  .devis-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .devis-item { display: flex; gap: 1.2rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(245,240,232,0.1); }
+  .devis-item:last-child { border-bottom: none; }
+  .devis-icon { width: 36px; height: 36px; border: 1px solid rgba(245,240,232,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; }
+  .devis-item-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 0.3rem; }
+  .devis-item-value { font-size: 0.95rem; color: var(--cream); }
+  .devis-item-value a { color: var(--cream); text-decoration: none; transition: color 0.3s; }
+  .devis-item-value a:hover { color: var(--terra-light); }
+
+  .devis-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .fg { display: flex; flex-direction: column; gap: 0.35rem; }
+  .fl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+  .fi { background: rgba(245,240,232,0.06); border: 1px solid rgba(245,240,232,0.12); color: var(--cream); padding: 0.8rem 1rem; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; outline: none; transition: border-color 0.3s; resize: none; width: 100%; }
+  .fi:focus { border-color: var(--terra-light); }
+  .fi option { background: var(--brown-2); }
+  .fi::placeholder { color: rgba(245,240,232,0.25); }
+  textarea.fi { height: 100px; }
+  .devis-submit { background: var(--terra); border: none; color: var(--cream); padding: 1rem 2rem; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, transform 0.2s; align-self: flex-start; }
+  .devis-submit:hover:not(:disabled) { background: var(--terra-light); transform: translateY(-1px); }
+  .devis-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .form-feedback { font-size: 0.82rem; padding: 0.75rem 1rem; display: none; }
+  .form-feedback.success { background: rgba(45,106,79,0.25); border: 1px solid rgba(82,183,136,0.4); color: #7ec8a0; display: block; }
+  .form-feedback.error { background: rgba(155,34,38,0.2); border: 1px solid rgba(224,122,122,0.4); color: #e07a7a; display: block; }
+  .form-feedback.warning { background: rgba(139,69,19,0.2); border: 1px solid rgba(139,69,19,0.4); color: var(--terra-light); display: block; }
+
+  /* FOOTER */
+  footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--cream-2); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--brown); }
+  .footer-logo strong { text-transform: uppercase; }
+  footer p { font-size: 0.75rem; color: var(--text-muted); }
+  .footer-admin { font-size: 0.7rem; color: var(--text-muted); text-decoration: none; opacity: 0.3; transition: opacity 0.3s; }
+  .footer-admin:hover { opacity: 1; color: var(--terra); }
+
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 250px; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-wrap { grid-template-columns: 1fr; }
+    .about-left, .about-right { padding: 4rem 1.5rem; }
+    .devis-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Fabien <strong>BOSTDEDORE</strong></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#devis">Devis</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left fade-up">
+    <div class="hero-tag">Artisan du Bâtiment — Bouches-du-Rhône</div>
+    <h1 id="heroTitre">L'artisan de confiance pour tous vos <em>travaux</em></h1>
+    <p class="hero-sub" id="heroSousTitre">Construction, rénovation, installation — un savoir-faire transmis avec passion dans les Bouches-du-Rhône.</p>
+    <a href="#devis" class="hero-cta">Demander un devis →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-content">
+      <div class="hero-stat">
+        <span class="hero-stat-num">13</span>
+        <span class="hero-stat-label">Bouches-du-Rhône</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="fade-up">
+    <p class="section-label">Ce que je fais</p>
+    <h2 class="section-title">Mes services</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="services-grid fade-up" id="servicesGrid">
+    <div class="service-card"><div class="service-num">01</div><h3>Construction</h3><p>Gros œuvre, maçonnerie, fondations et élévation de murs.</p></div>
+    <div class="service-card"><div class="service-num">02</div><h3>Rénovation</h3><p>Rénovation intérieure et extérieure, rafraîchissement de façade.</p></div>
+    <div class="service-card"><div class="service-num">03</div><h3>Installation</h3><p>Pose et installation d'équipements, aménagements intérieurs.</p></div>
+    <div class="service-card"><div class="service-num">04</div><h3>Travaux à domicile</h3><p>Petits et grands travaux chez vous, interventions rapides.</p></div>
+  </div>
+</section>
+
+<div class="about-wrap" id="about">
+  <div class="about-left fade-up">
+    <p class="section-label">À propos</p>
+    <h2 class="section-title">Un artisan passionné dans les Bouches-du-Rhône</h2>
+    <div class="section-divider"></div>
+    <p id="aboutTexte">Passionné par mon métier depuis de nombreuses années, j'interviens sur tous types de chantiers avec le même niveau d'exigence et de professionnalisme.</p>
+  </div>
+  <div class="about-right fade-up">
+    <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-label">Fait main</div></div>
+    <div class="about-stat"><div class="about-stat-num">13</div><div class="about-stat-label">Département couvert</div></div>
+    <div class="about-stat"><div class="about-stat-num">∞</div><div class="about-stat-label">Engagement client</div></div>
+  </div>
+</div>
+
+<section class="zone" id="zone">
+  <div class="fade-up">
+    <p class="section-label">Déplacement</p>
+    <h2 class="section-title">Zone d'intervention</h2>
+    <div class="section-divider"></div>
+    <div class="zone-box">
+      <div class="zone-icon">📍</div>
+      <div>
+        <h3 id="zoneTitle">Bouches-du-Rhône (13)</h3>
+        <p>J'interviens dans tout le département des Bouches-du-Rhône et ses alentours. Contactez-moi pour vérifier votre commune.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="avis-section" id="avis">
+  <div class="fade-up">
+    <div class="avis-header">
+      <div>
+        <p class="section-label">Témoignages</p>
+        <h2 class="section-title">Ce que disent mes clients</h2>
+        <div class="section-divider"></div>
+      </div>
+      <a href="avis.html" class="voir-tous">Voir tous les avis →</a>
+    </div>
+    <div class="avis-grid" id="avisGrid">
+      <div style="color:var(--text-muted);font-size:0.88rem">Chargement des avis...</div>
+    </div>
+    <a href="avis.html" class="laisser-avis-btn">Laisser un avis ✦</a>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="fade-up">
+    <p class="section-label">Questions fréquentes</p>
+    <h2 class="section-title">FAQ</h2>
+    <div class="section-divider"></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-question">Comment se passe un devis ? <span class="faq-arrow">+</span></button><div class="faq-answer">Suite à votre demande, je vous contacte pour convenir d'un rendez-vous sur place. Le devis est établi après visite et vous est remis par écrit.</div></div>
+      <div class="faq-item"><button class="faq-question">Quels sont vos délais d'intervention ? <span class="faq-arrow">+</span></button><div class="faq-answer">Je m'engage à vous répondre sous 24h et à intervenir dans les meilleurs délais selon la nature des travaux.</div></div>
+      <div class="faq-item"><button class="faq-question">Intervenez-vous hors du 13 ? <span class="faq-arrow">+</span></button><div class="faq-answer">J'interviens principalement dans les Bouches-du-Rhône, mais des déplacements dans les départements voisins sont possibles selon le projet.</div></div>
+      <div class="faq-item"><button class="faq-question">Quels types de travaux prenez-vous en charge ? <span class="faq-arrow">+</span></button><div class="faq-answer">Tous types de travaux manuels : construction, rénovation, installation, maçonnerie, pose de carrelage, plâtrerie, et bien plus.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="devis-section" id="devis">
+  <div class="fade-up">
+    <p class="section-label">Me contacter</p>
+    <h2 class="section-title">Demander un devis</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="devis-grid">
+    <div class="devis-info fade-up">
+      <div class="devis-item"><div class="devis-icon">📞</div><div><div class="devis-item-label">Téléphone</div><div class="devis-item-value"><a href="tel:0628550995">06 28 55 09 95</a></div></div></div>
+      <div class="devis-item"><div class="devis-icon">✉️</div><div><div class="devis-item-label">Email</div><div class="devis-item-value"><a href="mailto:fab710@gmail.com">fab710@gmail.com</a></div></div></div>
+      <div class="devis-item"><div class="devis-icon">📍</div><div><div class="devis-item-label">Zone</div><div class="devis-item-value" id="contactZone">Bouches-du-Rhône (13)</div></div></div>
+      <div class="devis-item"><div class="devis-icon">🕐</div><div><div class="devis-item-label">Disponibilité</div><div class="devis-item-value" id="contactDispo">Lun – Sam, 8h – 19h</div></div></div>
+    </div>
+    <div class="fade-up">
+      <form class="devis-form" id="devisForm">
+        <div class="form-row-2">
+          <div class="fg"><label class="fl">Nom complet *</label><input type="text" class="fi" id="nom" required></div>
+          <div class="fg"><label class="fl">Téléphone</label><input type="tel" class="fi" id="telephone"></div>
+        </div>
+        <div class="fg"><label class="fl">Type de travaux *</label>
+          <select class="fi" id="type_travaux" required>
+            <option value="">Sélectionnez...</option>
+            <option>Construction</option><option>Rénovation</option>
+            <option>Installation</option><option>Travaux à domicile</option><option>Autre</option>
+          </select>
+        </div>
+        <div class="form-row-2">
+          <div class="fg"><label class="fl">Surface estimée (m²)</label><input type="text" class="fi" id="surface" placeholder="Ex: 80 m²"></div>
+          <div class="fg"><label class="fl">Budget approximatif</label>
+            <select class="fi" id="budget">
+              <option value="">Non défini</option>
+              <option>Moins de 1 000 €</option><option>1 000 – 5 000 €</option>
+              <option>5 000 – 15 000 €</option><option>15 000 – 50 000 €</option>
+              <option>Plus de 50 000 €</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label class="fl">Urgence</label>
+          <select class="fi" id="urgence">
+            <option value="">Non urgent</option>
+            <option>Dans le mois</option><option>Dans les 3 mois</option>
+            <option>Dans les 6 mois</option><option>Flexible</option>
+          </select>
+        </div>
+        <div class="fg"><label class="fl">Description du projet *</label><textarea class="fi" id="message" required placeholder="Décrivez vos travaux, contraintes, accès..."></textarea></div>
+        <div class="form-feedback" id="formFeedback"></div>
+        <button type="submit" class="devis-submit" id="submitBtn">Envoyer la demande →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Fabien <strong>BOSTDEDORE</strong></div>
+  <p>Artisan du Bâtiment — Bouches-du-Rhône</p>
+  <p>© 2026</p>
+  <a href="admin.html" class="footer-admin">Admin</a>
+</footer>
+
+<script>
+const API = "https://bostdedore-api.capkychannel.workers.dev";
+
+async function getFingerprint() {
+  const data = [navigator.userAgent, navigator.language, screen.width, screen.height, screen.colorDepth, navigator.hardwareConcurrency, navigator.platform, Intl.DateTimeFormat().resolvedOptions().timeZone].join('|');
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(data));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').slice(0,32);
+}
+
+async function loadContent() {
+  try {
+    const res = await fetch(`${API}/site-content`);
+    const c = await res.json();
+    if (c.hero_sous_titre) document.getElementById('heroSousTitre').textContent = c.hero_sous_titre;
+    if (c.about_texte) document.getElementById('aboutTexte').innerHTML = c.about_texte;
+    if (c.disponibilites) document.getElementById('contactDispo').textContent = c.disponibilites;
+    if (c.zone) { document.getElementById('contactZone').textContent = c.zone; document.getElementById('zoneTitle').textContent = c.zone; }
+    if (c.services?.length) {
+      document.getElementById('servicesGrid').innerHTML = c.services.map((s, i) => `<div class="service-card"><div class="service-num">0${i+1}</div><h3>${s.titre}</h3><p>${s.texte}</p></div>`).join('');
+    }
+  } catch(e) { console.warn('Contenu non chargé', e); }
+}
+
+async function loadAvis() {
+  try {
+    const res = await fetch(`${API}/avis`);
+    const all = await res.json();
+    const top = all.filter(a => a.mis_en_avant).slice(0,3).concat(all.filter(a => !a.mis_en_avant)).slice(0,3);
+    const grid = document.getElementById('avisGrid');
+    if (!top.length) { grid.innerHTML = '<div style="color:var(--text-muted);font-size:0.88rem">Soyez le premier à laisser un avis !</div>'; return; }
+    grid.innerHTML = top.map(a => `
+      <div class="avis-card">
+        <div class="avis-stars">${'★'.repeat(a.etoiles)}${'☆'.repeat(5-a.etoiles)}</div>
+        <p class="avis-text">"${esc(a.texte)}"</p>
+        <div class="avis-author">— ${esc(a.nom)}</div>
+        ${a.reponse ? `<div class="avis-reponse"><strong>Réponse de Fabien</strong>${esc(a.reponse)}</div>` : ''}
+      </div>`).join('');
+  } catch(e) { console.warn('Avis non chargés', e); }
+}
+
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement, wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+document.getElementById('devisForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const feedback = document.getElementById('formFeedback');
+  btn.disabled = true; btn.textContent = 'Envoi en cours...';
+  feedback.className = 'form-feedback';
+  const fp = await getFingerprint();
+  try {
+    const res = await fetch(`${API}/contact`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+      nom: document.getElementById('nom').value.trim(),
+      telephone: document.getElementById('telephone').value.trim(),
+      type_travaux: document.getElementById('type_travaux').value,
+      surface: document.getElementById('surface').value.trim(),
+      budget: document.getElementById('budget').value,
+      urgence: document.getElementById('urgence').value,
+      message: document.getElementById('message').value.trim(),
+      fingerprint: fp
+    })});
+    const data = await res.json();
+    if (data.success) {
+      feedback.className = 'form-feedback success'; feedback.textContent = '✓ Demande envoyée ! Je vous recontacte sous 24h.';
+      e.target.reset(); btn.textContent = 'Demande envoyée';
+    } else if (data.blocked) {
+      feedback.className = 'form-feedback warning'; feedback.textContent = '⚠ Vous avez déjà envoyé une demande. Je vous contacterai bientôt.';
+      btn.disabled = false; btn.textContent = 'Envoyer la demande →';
+    } else { throw new Error(); }
+  } catch {
+    feedback.className = 'form-feedback error'; feedback.textContent = '✗ Erreur. Appelez directement au 06 28 55 09 95.';
+    btn.disabled = false; btn.textContent = 'Envoyer la demande →';
+  }
+});
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+loadContent(); loadAvis();
+</script>
+</body>
+</html>
