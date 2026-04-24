@@ -250,7 +250,10 @@ footer .copy{font-size:0.72rem;color:var(--text-dim)}
         <a href="#services" class="btn-secondary">Nos services</a>
       </div>
     </div>
-    <div class="hero-right"></div>
+    <div class="hero-right">
+      <div id="heroStatsContainer"></div>
+    </div>
+  </div>
   <div class="hero-bottom">
     <div class="hero-bottom-item"><div class="hero-bottom-icon">📞</div><div><div class="hero-bottom-label">Téléphone</div><div class="hero-bottom-value" id="heroTel"><a href="tel:0628550995" style="color:inherit;text-decoration:none">06 28 55 09 95</a></div></div></div>
     <div class="hero-bottom-item"><div class="hero-bottom-icon">✉️</div><div><div class="hero-bottom-label">Email</div><div class="hero-bottom-value" id="heroEmail"><a href="mailto:fab710@gmail.com" style="color:inherit;text-decoration:none">fab710@gmail.com</a></div></div></div>
@@ -490,16 +493,29 @@ function applyConfig() {
       </div>`).join('');
   }
   // About
-  if (cfg.about) document.getElementById('aboutTexte').innerHTML = cfg.about;
+  if (cfg.about) document.getElementById('aboutTexte').textContent = cfg.about;
   // Stats
-  if (cfg.stats?.length) {
-    document.getElementById('aboutStats').innerHTML = cfg.stats.map(s => `<div class="about-stat"><div class="about-stat-num">${esc(s.valeur)}</div><div class="about-stat-label">${esc(s.label)}</div></div>`).join('');
-    // Hero stats
-    cfg.stats.slice(0,3).forEach((s, i) => {
-      const el = document.getElementById(`stat${i+1}`);
-      if (el) { el.querySelector('.hero-stat-num').textContent = s.valeur; el.querySelector('.hero-stat-label').textContent = s.label; }
-    });
+  // Stats
+if (cfg.stats?.length) {
+  document.getElementById('aboutStats').innerHTML =
+    cfg.stats.map(s =>
+      `<div class="about-stat">
+        <div class="about-stat-num">${esc(s.valeur)}</div>
+        <div class="about-stat-label">${esc(s.label)}</div>
+      </div>`
+    ).join('');
+
+  // Hero stats
+  const heroContainer = document.getElementById('heroStatsContainer');
+  if (heroContainer) {
+    heroContainer.innerHTML = cfg.stats.map(s => `
+      <div class="hero-stat-box fade-up">
+        <span class="hero-stat-num">${esc(s.valeur)}</span>
+        <span class="hero-stat-label">${esc(s.label)}</span>
+      </div>
+    `).join('');
   }
+}
   // FAQ
   if (cfg.faq?.length) {
     document.getElementById('faqList').innerHTML = cfg.faq.map(f => `
