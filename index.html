@@ -385,10 +385,6 @@ footer .copy{font-size:0.72rem;color:var(--text-dim)}
         <div class="fg"><label class="fl">Zone d'intervention</label>
           <select class="fi" id="zone"><option value="">Sélectionnez...</option></select>
         </div>
-        <div class="fg"><label class="fl">Surface estimée</label><input type="text" class="fi" id="surface" placeholder="exemple : 80 m²"></div>
-        <div class="fg"><label class="fl">Budget approximatif</label>
-          <select class="fi" id="budget"><option value="">Non défini</option><option>Moins de 1 000 €</option><option>1 000 – 5 000 €</option><option>5 000 – 15 000 €</option><option>15 000 – 50 000 €</option><option>Plus de 50 000 €</option></select>
-        </div>
         <div class="fg"><label class="fl">Urgence</label>
           <select class="fi" id="urgence"><option value="">Non urgent</option><option>Dans les 6 mois</option><option>Dans les 3 mois</option><option>Dans le mois</option><option>Urgent</option></select>
         </div>
@@ -617,8 +613,6 @@ document.getElementById('devisForm').addEventListener('submit', async e => {
       telephone: document.getElementById('telephone').value.trim(),
       type_travaux: document.getElementById('type_travaux').value,
       zone: document.getElementById('zone').value,
-      surface: document.getElementById('surface').value.trim(),
-      budget: document.getElementById('budget').value,
       urgence: document.getElementById('urgence').value,
       message: document.getElementById('message').value.trim(),
       fingerprint: fp
